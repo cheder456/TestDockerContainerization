@@ -1,0 +1,21 @@
+version: '3'
+services:
+  ptest:
+    build: 
+        context: ./PythonService
+    image: charl/python-nodejs:latest
+    command: nodemon SHModelUtils.py
+    ports:
+      - '7000:7000'
+    working_dir: /code/PythonService
+    volumes:
+      - ./PythonService:/code/PythonService:cached
+  jtest:
+    build: 
+        context: ./FormalModel
+    image: charl/formalmodel:latest
+    ports:
+      - '8000:8000'
+    working_dir: /code/FormalModel
+    volumes:
+      - ./PythonService:/code/FormalModel:cached
